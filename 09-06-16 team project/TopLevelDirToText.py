@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import os
 import webbrowser
 from string import Template
