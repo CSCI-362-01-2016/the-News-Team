@@ -1,3 +1,5 @@
+myList.sh
+README.txt
 TextForHtml.txt
 Output.html
-TopLevelDirToText.py
+myList.py
