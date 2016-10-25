@@ -1,6 +1,6 @@
 0001
 converts a RFC defined time string into system timestamp
-youtube_dl
-utils.timeconvert(timestr)
+youtube_dl/utils
+timeconvert
 1;Tue, Oct 2016 09:46:30 +0000
 1477403190
