@@ -9,7 +9,7 @@ pathName = str(os.path.dirname(os.path.abspath(__file__)))
 
 def main():
     parseTextFile()
-    formatList =["Test case","requirement","component","method","inputs","expected outcome(s)","actual outcome","PASS/FAIL","Test case","requirement","component","method","inputs","expected outcome(s)","actual outcome","PASS/FAIL"]
+    formatList =["Example Case","Example requirement","example component","example method","example inputs","example expected outcome(s)","example actual outcome","example PASS/FAIL"," example Test case","requirement","example component","example method","example inputs","example expected outcome(s)","example actual outcome"," example PASS/FAIL"]
     textToHtml(formatList)
     loadOutputInBrowser()
 
