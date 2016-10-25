@@ -12,6 +12,9 @@ import unittest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+from youtube_dl.aes import aes_decrypt, aes_encrypt, aes_cbc_decrypt, aes_decrypt_text
+from youtube_dl.utils import bytes_to_intlist, intlist_to_bytes
+import base64
 from test.helper import try_rm
 
 
@@ -42,7 +45,32 @@ class TestSuite(unittest.TestCase):
 
     #Some helper definitions
 
-    
+
+    #AES = advanced encryption standard
+    #There is a flag in the Youtube downloader that lets the user also download
+    #a description for the video.  The user has a choice to have that
+    #description be encrypted with this encoding:
+    def setUp(self):
+        self.key = self.iv = [0x20, 0x15] + 14 * [0]
+        #print(self.key)
+        self.secret_msg = b'Secret message goes here'
+
+    #Note, this function can only encrypt messages 16 characters at a time.
+    def test_encrypt(self):
+        msg = b'Hello world'
+        key = list(range(len(msg)))
+        print()
+        print("Testing video description encrypting function")
+        print("Original message:")
+        print(msg)
+        encrypted = aes_encrypt(bytes_to_intlist(msg), key)
+        print("Encrypted:")
+        print(encrypted)
+        decrypted = intlist_to_bytes(aes_decrypt(encrypted, key))
+        print("Decrypted:")
+        print(decrypted)
+
+        
     #This method returns True to the video is restricted based on the user's age.
     def assert_restricted(self, url, filename, age, old_age=None):
         self.assertTrue(isRestricted(url, filename, old_age))
