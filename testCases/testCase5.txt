@@ -1,5 +1,5 @@
 0005
-Formats seconds so they display as minutes or hours if able
+formats seconds into hours mins and seconds
 youtube_dl/utils
 formatSeconds
 127
