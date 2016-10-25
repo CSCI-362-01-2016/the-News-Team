@@ -1,0 +1,6 @@
+0005
+Formats seconds so they display as minutes or hours if able
+youtube_dl/utils
+formatSeconds
+127
+2:07
