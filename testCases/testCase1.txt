@@ -1,0 +1,6 @@
+0001
+converts a RFC defined time string into system timestamp
+method being tested is a part of the utils component
+utils.timeconvert(timestr)
+Tue, Oct 2016 09:46:30 +0000
+1477403190
