@@ -1,0 +1,6 @@
+0003
+Clean an HTML snippet into a readable string
+youtube_dl
+clean_html
+<!doctype html> <html lang="en"> <head> <meta charset="utf-8"> <title>Test Report</title> </head> <body> <h1>Test Output</h1> <p>$output</p> </body> </html>
+Test Output $output
