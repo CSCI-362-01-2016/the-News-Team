@@ -1,6 +1,6 @@
 0005
-formats seconds into hours mins and seconds
+takes an iso8601 and returns UNIX timestamp from the given date
 youtube_dl/utils
-formatSeconds
-127
-2:07
+parse_iso8601
+1997-07-16T19:20:30+01:00
+869077230
