@@ -136,6 +136,9 @@ class TestSuite(unittest.TestCase):
         decrypted = intlist_to_bytes(aes_decrypt(encrypted, key))
         print("Decrypted:")
         print(decrypted)
+        f=open('testfile', 'a')
+        f.write("<br><h1>Test5: Encrypt video description</h1><br>Message:"+msg+"<br>Encrypted:"+ str(encrypted)+"<br>Decrypted:"+str(decrypted))
+        f.close()
 
         
     #This method returns True to the video is restricted based on the user's age.
