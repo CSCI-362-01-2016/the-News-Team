@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 import os
 import webbrowser
+from project import *
 
+os.chdir("..") #nove back one folder
 pathName = str(os.path.dirname(os.path.abspath(__file__)))
 
 def main():
@@ -11,10 +13,7 @@ def parseTextFile():
     #number of text files to parse
     txtFileCount = 0
 
-    os.chdir("..") #nove back one folder
-    print(os.getcwd())
     os.chdir("testCases") #move into the test cases folder
-    os.listdir(os.getcwd())
 
     #gathering count of test case files
     for file in os.listdir(os.getcwd()):
@@ -41,7 +40,10 @@ def parseTextFile():
 
 
 def executeTestCase():
-    return;
+    for root, dirs, files in os.walk(pathName):
+        if name in files:
+            return os.path.join(root, name)
+    return
 
 def writeOutputToHtml():
     return;
