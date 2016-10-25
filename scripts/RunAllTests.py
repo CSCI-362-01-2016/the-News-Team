@@ -1,13 +1,17 @@
 #!/usr/bin/env python
 import os
 import webbrowser
-from project import *
+from string import Template
+
 
 os.chdir("..") #nove back one folder
 pathName = str(os.path.dirname(os.path.abspath(__file__)))
 
 def main():
     parseTextFile()
+    formatList =["Test case","requirement","component","method","inputs","expected outcome(s)","actual outcome","PASS/FAIL","Test case","requirement","component","method","inputs","expected outcome(s)","actual outcome","PASS/FAIL"]
+    textToHtml(formatList)
+    loadOutputInBrowser()
 
 def parseTextFile():
     #number of text files to parse
@@ -47,33 +51,40 @@ def executeTestCase():
 
 def writeOutputToHtml():
     return;
-def textToHtml():
-    inf = open("TextForHtml.txt","r")
-    outf = open("Output.html","w")
+def textToHtml(listOutput):
+    outf = open("TestReport.html","w")
     template = Template("""<!doctype html>
 
     <html lang="en">
     <head>
       <meta charset="utf-8">
 
-      <title>Files In Directory</title>
+      <title>Test Report</title>
 
     </head>
 
     <body>
-        <h1>The Files In the Directory Are:</h1>
+        <h1>Test Output</h1>
       <p>$output</p>
     </body>
     </html>""")
-    files = "";
-    for line in inf:
-        files += line + "<br>"
+    out = "";
+    index = 0;
+    formatList =["Test case","Requirement","Component","Method","Inputs","Expected outcome(s)","Actual outcome","PASS/FAIL"]
+    while index < len(listOutput)-2:
+        out += "<dl>"
+        for i in range(0,8):
+            out = out + "<dt>" +formatList[i]
+            out = out + "<dd>" +listOutput[index] + "</dd>" + "</dt>"
+            index += 1
+        out += "</dl>"
 
-    outf.write(template.substitute(output=files))
-    inf.close()
+    outf.write(template.substitute(output=out))
     outf.close()
 
 def loadOutputInBrowser():
-    return;
+    new = 2  # Code used to open html link in a new tab
+    webbrowser.open(pathName +"/testCases/TestReport.html",new=new)
+    print(pathName + "/TestReport.html\n")
 
 main()
