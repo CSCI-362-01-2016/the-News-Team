@@ -1,0 +1,6 @@
+0012
+sanitizes a string so it could be used as a file name
+youtube_dl/utils
+sanitize_filename
+3;here is another file \ name to sanitize;True;False
+here_is_another_file_name_to_sanitize
