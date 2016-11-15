@@ -8,18 +8,19 @@ os.chdir("..") #nove back one folder
 pathName = str(os.path.dirname(os.path.abspath(__file__)))
 
 def main():
-    parseTextFile()
+
     formatList =["Example Case","Example requirement","example component","example method","example inputs","example expected outcome(s)","example actual outcome","example PASS/FAIL"," example Test case","requirement","example component","example method","example inputs","example expected outcome(s)","example actual outcome"," example PASS/FAIL"]
-    textToHtml(formatList)
+    textToHtml(fakeexecuteTestCases())
+    # executeTestCase(parseTextFile())
     loadOutputInBrowser()
 
 def parseTextFile():
     #number of text files to parse
     txtFileCount = 0
-
     os.chdir("testCases") #move into the test cases folder
 
     #gathering count of test case files
+    dataList = []
     for file in os.listdir(os.getcwd()):
         # dataList in the form of
         # [0] Test number
@@ -28,7 +29,7 @@ def parseTextFile():
         # [3] Method being tested
         # [4] Test input
         # [5] Expected Outcomes
-        dataList = []
+
 
         if file.endswith(".txt"):
             txtFileCount += 1
@@ -36,22 +37,48 @@ def parseTextFile():
             inputFile = open(file, "r")
             for line in inputFile:
                 dataList.append(line)
+
             inputFile.close()
-
-            print ("Data list for text file #" + str(txtFileCount))
-            print(dataList)
-            print("\n")
+    return dataList
 
 
-def executeTestCase():
-    for root, dirs, files in os.walk(pathName):
-        if name in files:
-            return os.path.join(root, name)
-    return
+def fakeexecuteTestCases():
+    tempList = parseTextFile()
+    returnList = tempList.copy()
+    for i in range(tempList.__len__()-1,0,-1):
+
+        if i % 7 == 0:
+            returnList.insert(i,"pass")
+    print(returnList)
+    return returnList
+
+def executeTestCase(listTests):
+    print(listTests)
+    os.chdir("..")
+    os.chdir("project")
+    os.chdir("youtube_dl")
+    print(os.getcwd())
+    numberOfTests = listTests.__len__() // 6
+    print(numberOfTests)
+    for i in range(0,numberOfTests-1):
+        for z in range(1,9):
+            temp = listTests[(i*6)+z]
+            if(z == 2):
+                temp = temp.split("/")
+                print(temp[1])
+                print(os.getcwd())
+                temp[1]= temp[1].strip()
+                print(temp[1])
+
+
+    os.chdir("..")
+    return;
 
 def writeOutputToHtml():
     return;
 def textToHtml(listOutput):
+    os.chdir("..")
+    os.chdir("scripts")
     outf = open("TestReport.html","w")
     template = Template("""<!doctype html>
 
@@ -84,7 +111,7 @@ def textToHtml(listOutput):
 
 def loadOutputInBrowser():
     new = 2  # Code used to open html link in a new tab
-    webbrowser.open(pathName +"/testCases/TestReport.html",new=new)
+    webbrowser.open(pathName +"/TestReport.html",new=new)
     print(pathName + "/TestReport.html\n")
 
 main()
