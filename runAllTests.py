@@ -2,7 +2,13 @@
 import os
 import webbrowser
 from string import Template
+import importlib
+import sys
 
+from project.youtube_dl import utils
+
+sys.path.append(os.getcwd())
+from scripts.youtube_dl.utils import formatSeconds
 
 os.chdir("..") #nove back one folder
 pathName = str(os.path.dirname(os.path.abspath(__file__)))
@@ -10,9 +16,10 @@ pathName = str(os.path.dirname(os.path.abspath(__file__)))
 def main():
 
     formatList =["Example Case","Example requirement","example component","example method","example inputs","example expected outcome(s)","example actual outcome","example PASS/FAIL"," example Test case","requirement","example component","example method","example inputs","example expected outcome(s)","example actual outcome"," example PASS/FAIL"]
-    textToHtml(fakeexecuteTestCases())
+    #formatSeconds(4543)
+    executeTestCase(parseTextFile())
     # executeTestCase(parseTextFile())
-    loadOutputInBrowser()
+    #loadOutputInBrowser()
 
 def parseTextFile():
     #number of text files to parse
@@ -36,7 +43,7 @@ def parseTextFile():
 
             inputFile = open(file, "r")
             for line in inputFile:
-                dataList.append(line)
+                dataList.append(line.strip())
 
             inputFile.close()
     return dataList
@@ -45,9 +52,10 @@ def parseTextFile():
 def fakeexecuteTestCases():
     tempList = parseTextFile()
     returnList = tempList.copy()
-    for i in range(tempList.__len__()-1,0,-1):
+    print(tempList.__len__())
+    for i in range(tempList.__len__(),0,-1):
 
-        if i % 7 == 0:
+        if (i ) % 6 == 0:
             returnList.insert(i,"pass")
     print(returnList)
     return returnList
@@ -56,19 +64,35 @@ def executeTestCase(listTests):
     print(listTests)
     os.chdir("..")
     os.chdir("project")
-    os.chdir("youtube_dl")
     print(os.getcwd())
     numberOfTests = listTests.__len__() // 6
     print(numberOfTests)
+    index = 0
     for i in range(0,numberOfTests-1):
-        for z in range(1,9):
-            temp = listTests[(i*6)+z]
+        for z in range(1,7):
+
+
             if(z == 2):
+                print(index)
+                temp = listTests[(i * 6) + z]
+                #todo make an if statment making sure that the file is in the base youtube_dl folder
+                os.chdir("youtube_dl")#get into folder
                 temp = temp.split("/")
-                print(temp[1])
-                print(os.getcwd())
-                temp[1]= temp[1].strip()
-                print(temp[1])
+                temp[1]= temp[1].strip()#the name of the method to call
+                #todo get paramaters into list so it can be passed into the getattr()
+                paramaterList = listTests[index+3].split(";")
+                listTests[index + 2] = listTests[index+2].strip()
+
+                for i in range(0,paramaterList.__len__()):
+                    paramaterList[i] = paramaterList[i].strip()#paramater for method to be called
+                print(listTests[index+2])
+                print(paramaterList)
+                if(paramaterList[0].isdigit()):
+                    paramaterList[0] = int(paramaterList[0])
+                returnInput = getattr(utils,listTests[index+2])(*paramaterList)
+                os.chdir("..")#gets our of folder
+                print("help ",returnInput)
+            index += 1
 
 
     os.chdir("..")
