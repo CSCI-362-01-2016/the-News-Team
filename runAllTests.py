@@ -10,16 +10,16 @@ from project.youtube_dl import utils
 sys.path.append(os.getcwd())
 from scripts.youtube_dl.utils import formatSeconds
 
-os.chdir("..") #nove back one folder
+ #nove back one folder
 pathName = str(os.path.dirname(os.path.abspath(__file__)))
 
 def main():
 
     formatList =["Example Case","Example requirement","example component","example method","example inputs","example expected outcome(s)","example actual outcome","example PASS/FAIL"," example Test case","requirement","example component","example method","example inputs","example expected outcome(s)","example actual outcome"," example PASS/FAIL"]
     #formatSeconds(4543)
-    executeTestCase(parseTextFile())
+    print(executeTestCase(parseTextFile()))
     # executeTestCase(parseTextFile())
-    #loadOutputInBrowser()
+    loadOutputInBrowser()
 
 def parseTextFile():
     #number of text files to parse
@@ -61,6 +61,7 @@ def fakeexecuteTestCases():
     return returnList
 
 def executeTestCase(listTests):
+    returnList = listTests.copy()
     print(listTests)
     os.chdir("..")
     os.chdir("project")
@@ -86,22 +87,23 @@ def executeTestCase(listTests):
                 for i in range(0,paramaterList.__len__()):
                     paramaterList[i] = paramaterList[i].strip()#paramater for method to be called
                 print(listTests[index+2])
-                print(paramaterList)
+
                 if(paramaterList[0].isdigit()):
                     paramaterList[0] = int(paramaterList[0])
-                returnInput = getattr(utils,listTests[index+2])(*paramaterList)
+                returnInput = str(getattr(utils,listTests[index+2])(*paramaterList)).strip()
                 os.chdir("..")#gets our of folder
-                print("help ",returnInput)
+                print(returnInput)
+                print(listTests[index + 4])
+                returnList.insert(index+(i)*3+ 4,returnInput==listTests[index+4])
             index += 1
 
 
     os.chdir("..")
-    return;
+    return returnList;
 
 def writeOutputToHtml():
     return;
 def textToHtml(listOutput):
-    os.chdir("..")
     os.chdir("scripts")
     outf = open("TestReport.html","w")
     template = Template("""<!doctype html>
@@ -122,11 +124,11 @@ def textToHtml(listOutput):
     out = "";
     index = 0;
     formatList =["Test case","Requirement","Component","Method","Inputs","Expected outcome(s)","Actual outcome","PASS/FAIL"]
-    while index < len(listOutput)-2:
+    while index < len(listOutput)-5:
         out += "<dl>"
-        for i in range(0,8):
+        for i in range(0,6):
             out = out + "<dt>" +formatList[i]
-            out = out + "<dd>" +listOutput[index] + "</dd>" + "</dt>"
+            out = out + "<dd>" +str(listOutput[index]) + "</dd>" + "</dt>"
             index += 1
         out += "</dl>"
 

@@ -2,5 +2,5 @@
 converts a RFC defined time string into system timestamp
 youtube_dl/utils
 timeconvert
-Tue, Oct 2016 09:46:30 +0000
-1477403190
+Fri, 21 Nov 1997 09:55:06 -0600
+880127706
