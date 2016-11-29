@@ -103,6 +103,7 @@ def executeTestCase(listTests):
             index += 1
 
     os.chdir("..")
+    print(returnList)
     return returnList
 
 
@@ -162,7 +163,10 @@ table th {
             if (index < 8):
                 out = out + "<th>" + formatList[i] + "</th>"
             else:
-                out = out + "<td><xmp>" + str(listOutput[index]) + "</xmp></td>"
+                if(str(listOutput[index-8]) == str(True)):
+                    out = out + "<td style=\"background:green;\"><xmp>" + str(listOutput[index-8]) + "</xmp></td>"
+                else:
+                    out = out + "<td><xmp>" + str(listOutput[index-8]) + "</xmp></td>"
             index += 1
         out += "</tr>"
 

@@ -1,0 +1,6 @@
+0006
+takes a string and returns a tuple repersenting the version number
+youtube_dl/utils
+version_tuple
+7.4.102
+(7, 4, 102)
