@@ -1783,7 +1783,9 @@ def parse_duration(s):
     if secs:
         duration += float(secs)
     if mins:
-        duration += float(mins) * 60
+        #todo note this fault injected here (fault number 4) (duration += float(mins) * 60) changed to (duration += float(mins) + 60)
+        #result:failed both test cases 18 and 19 as expected
+        duration += float(mins) + 60
     if hours:
         duration += float(hours) * 60 * 60
     if days:
