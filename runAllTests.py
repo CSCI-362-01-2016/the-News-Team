@@ -68,12 +68,9 @@ def fakeexecuteTestCases():
 
 def executeTestCase(listTests):
     returnList = listTests.copy()
-    print(listTests)
     os.chdir("..")
     os.chdir("project")
-    print(os.getcwd())
     numberOfTests = listTests.__len__() // 6
-    print(numberOfTests)
     index = 0
     for i in range(0, numberOfTests):
         for z in range(1, 7):
@@ -97,13 +94,11 @@ def executeTestCase(listTests):
                 # todo dont hardcode default into untils here
                 returnInput = str(getattr(utils, listTests[index + 2])(*paramaterList)).strip()
                 os.chdir("..")  # gets our of folder
-                print(i)
                 returnList.insert(index + 5 + i * 2, returnInput == listTests[index + 4])
                 returnList.insert(index + 5 + i * 2, returnInput)
             index += 1
 
     os.chdir("..")
-    print(returnList)
     return returnList
 
 
@@ -122,28 +117,28 @@ def textToHtml(listOutput):
 
       <title>Test Report</title>
       <style>
-table {
-    width:100%;
-}
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-}
-th, td {
-    padding: 5px;
-    text-align: left;
-}
-table tr:nth-child(even) {
-    background-color: #eee;
-}
-table tr:nth-child(odd) {
-   background-color:#fff;
-}
-table th {
-    background-color: black;
-    color: white;
-}
-</style>
+        table {
+            width:100%;
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px;
+            text-align: left;
+        }
+        table tr:nth-child(even) {
+            background-color: #eee;
+        }
+        table tr:nth-child(odd) {
+            background-color:#FFF;
+        }
+        table th {
+            background-color: black;
+             color: white;
+        }
+       </style>
 
     </head>
 
@@ -156,7 +151,7 @@ table th {
     out = ""
     index = 0
     formatList = ["Test case", "Requirement", "Component", "Method", "Inputs", "Expected outcome(s)", "Actual outcome",
-                  "PASS/FAIL"]
+                  "PASS"]
     while index < len(listOutput) - 5:
         out += "<tr>"
         for i in range(0, 8):
