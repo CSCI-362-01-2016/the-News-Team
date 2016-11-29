@@ -440,7 +440,9 @@ def timeconvert(timestr):
     """Convert RFC 2822 defined time string into system timestamp"""
     timestamp = None
     timetuple = email.utils.parsedate_tz(timestr)
-    if timetuple is not None:
+    #todo make note of the fault injected here (fault number 3) (if timetuple is not None:) changed to (if timetuple is None:)
+    #results: caused this method to return None for both test cases. Failed test case 1 and 11 as expected
+    if timetuple is None:
         timestamp = email.utils.mktime_tz(timetuple)
     return timestamp
 
@@ -453,7 +455,8 @@ def sanitize_filename(s, restricted=False, is_id=False):
     def replace_insane(char):
         if restricted and char in ACCENT_CHARS:
             return ACCENT_CHARS[char]
-        if char == '?' or ord(char) < 32 or ord(char) == 127:
+        #todo keep note of the fault injected here(fault number 1) (if char == '?' or ord(char) < 32 or ord(char) == 127:) changed to (if char == '?' and ord(char) < 32 or ord(char) == 127:)
+        if char == '?' and ord(char) < 32 or ord(char) == 127:
             return ''
         elif char == '"':
             return '' if restricted else '\''
@@ -633,7 +636,9 @@ def decodeOption(optval):
 
 
 def formatSeconds(secs):
-    if secs > 3600:
+    #todo make note of fault injected here (fault number 2)(if secs >3600:) changed to (if secs<3600:)
+    #result both test cases 14 and 4 failed as expected
+    if secs < 3600:
         return '%d:%02d:%02d' % (secs // 3600, (secs % 3600) // 60, secs % 60)
     elif secs > 60:
         return '%d:%02d' % (secs // 60, secs % 60)
