@@ -69,12 +69,12 @@ def executeTestCase(listTests):
     numberOfTests = listTests.__len__() // 6
     print(numberOfTests)
     index = 0
-    for i in range(0,numberOfTests-1):
+    for i in range(0,numberOfTests):
         for z in range(1,7):
 
 
             if(z == 2):
-                print(index)
+                #print(index)
                 temp = listTests[(i * 6) + z]
                 #todo make an if statment making sure that the file is in the base youtube_dl folder
                 os.chdir("youtube_dl")#get into folder
@@ -84,25 +84,25 @@ def executeTestCase(listTests):
                 paramaterList = listTests[index+3].split(";")
                 listTests[index + 2] = listTests[index+2].strip()
 
-                for i in range(0,paramaterList.__len__()):
-                    paramaterList[i] = paramaterList[i].strip()#paramater for method to be called
-                print(listTests[index+2])
+                for z in range(0,paramaterList.__len__()):
+                    paramaterList[z] = paramaterList[z].strip()#paramater for method to be called
+                #print(listTests[index+2])
 
                 if(paramaterList[0].isdigit()):
                     paramaterList[0] = int(paramaterList[0])
                 returnInput = str(getattr(utils,listTests[index+2])(*paramaterList)).strip()
                 os.chdir("..")#gets our of folder
-                print(returnInput)
-                print(listTests[index + 4])
-                returnList.insert(index+(i)*3+ 4,returnInput==listTests[index+4])
+                print( i)
+                returnList.insert(index + 5 + i *2,returnInput==listTests[index+4])
+                returnList.insert(index + 5 + i *2,returnInput)
             index += 1
 
 
     os.chdir("..")
-    return returnList;
+    return returnList
 
 def writeOutputToHtml():
-    return;
+    return
 def textToHtml(listOutput):
     os.chdir("scripts")
     outf = open("TestReport.html","w")
@@ -121,8 +121,8 @@ def textToHtml(listOutput):
       <p>$output</p>
     </body>
     </html>""")
-    out = "";
-    index = 0;
+    out = ""
+    index = 0
     formatList =["Test case","Requirement","Component","Method","Inputs","Expected outcome(s)","Actual outcome","PASS/FAIL"]
     while index < len(listOutput)-5:
         out += "<dl>"
