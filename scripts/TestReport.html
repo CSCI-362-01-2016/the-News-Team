@@ -5,11 +5,35 @@
       <meta charset="utf-8">
 
       <title>Test Report</title>
+      <style>
+table {
+    width:100%;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+table tr:nth-child(even) {
+    background-color: #eee;
+}
+table tr:nth-child(odd) {
+   background-color:#fff;
+}
+table th {
+    background-color: black;
+    color: white;
+}
+</style>
 
     </head>
 
     <body>
-        <h1>Test Output</h1>
-      <p><dl><dt>Test case<dd>0005</dd></dt><dt>Requirement<dd>takes an iso8601 and returns UNIX timestamp from the given date</dd></dt><dt>Component<dd>youtube_dl/utils</dd></dt><dt>Method<dd>True</dd></dt><dt>Inputs<dd>parse_iso8601</dd></dt><dt>Expected outcome(s)<dd>1997-07-16T19:20:30+01:00</dd></dt></dl><dl><dt>Test case<dd>869077230</dd></dt><dt>Requirement<dd>0011</dd></dt><dt>Component<dd>converts a RFC defined time string into system timestamp</dd></dt><dt>Method<dd>True</dd></dt><dt>Inputs<dd>youtube_dl/utils</dd></dt><dt>Expected outcome(s)<dd>timeconvert</dd></dt></dl><dl><dt>Test case<dd>Wed, 26 Oct 2016 17:33:10 +0000</dd></dt><dt>Requirement<dd>1477503190</dd></dt><dt>Component<dd>0004</dd></dt><dt>Method<dd>True</dd></dt><dt>Inputs<dd>formats seconds into hours mins and seconds</dd></dt><dt>Expected outcome(s)<dd>youtube_dl/utils</dd></dt></dl><dl><dt>Test case<dd>formatSeconds</dd></dt><dt>Requirement<dd>23456</dd></dt><dt>Component<dd>6:30:56</dd></dt><dt>Method<dd>True</dd></dt><dt>Inputs<dd>0001</dd></dt><dt>Expected outcome(s)<dd>converts a RFC defined time string into system timestamp</dd></dt></dl><dl><dt>Test case<dd>youtube_dl/utils</dd></dt><dt>Requirement<dd>timeconvert</dd></dt><dt>Component<dd>Fri, 21 Nov 1997 09:55:06 -0600</dd></dt><dt>Method<dd>True</dd></dt><dt>Inputs<dd>880127706</dd></dt><dt>Expected outcome(s)<dd>0015</dd></dt></dl><dl><dt>Test case<dd>takes an iso8601 and returns UNIX timestamp from the given date</dd></dt><dt>Requirement<dd>youtube_dl/utils</dd></dt><dt>Component<dd>parse_iso8601</dd></dt><dt>Method<dd>True</dd></dt><dt>Inputs<dd>2016-11-15T09:02:43-05:00</dd></dt><dt>Expected outcome(s)<dd>1479218563</dd></dt></dl><dl><dt>Test case<dd>0012</dd></dt><dt>Requirement<dd>sanitizes a string so it could be used as a file name</dd></dt><dt>Component<dd>youtube_dl/utils</dd></dt><dt>Method<dd>True</dd></dt><dt>Inputs<dd>sanitize_filename</dd></dt><dt>Expected outcome(s)<dd>here is another file \ name to sanitize;True;False</dd></dt></dl><dl><dt>Test case<dd>here_is_another_file___name_to_sanitize</dd></dt><dt>Requirement<dd>0013</dd></dt><dt>Component<dd>Clean an HTML snippet into a readable string</dd></dt><dt>Method<dd>True</dd></dt><dt>Inputs<dd>youtube_dl/utils</dd></dt><dt>Expected outcome(s)<dd>clean_html</dd></dt></dl><dl><dt>Test case<dd><!doctype html> <html lang="en"> <head> <meta charset="utf-8"> <title></title> </head> <body> <h1>hellow world</h1> <p>goobye</p> </body> </html></dd></dt><dt>Requirement<dd>hellow world goobye</dd></dt><dt>Component<dd>0002</dd></dt><dt>Method<dd>True</dd></dt><dt>Inputs<dd>sanitizes a string so it could be used as a file name</dd></dt><dt>Expected outcome(s)<dd>youtube_dl/utils</dd></dt></dl><dl><dt>Test case<dd>sanitize_filename</dd></dt><dt>Requirement<dd>this is a file name       to sanitize?}{[]\|#'$';True;False</dd></dt><dt>Component<dd>this_is_a_file_name_______to_sanitize__________</dd></dt><dt>Method<dd>0014</dd></dt><dt>Inputs<dd>formats seconds into hours mins and seconds</dd></dt><dt>Expected outcome(s)<dd>youtube_dl/utils</dd></dt></dl><dl><dt>Test case<dd>formatSeconds</dd></dt><dt>Requirement<dd>23434</dd></dt><dt>Component<dd>6:30:34</dd></dt><dt>Method<dd>0003</dd></dt><dt>Inputs<dd>Clean an HTML snippet into a readable string</dd></dt><dt>Expected outcome(s)<dd>youtube_dl/utils</dd></dt></dl></p>
+        <table style="width:100%;">
+      <tr><th>Test case</th><th>Requirement</th><th>Component</th><th>Method</th><th>Inputs</th><th>Expected outcome(s)</th><th>Actual outcome</th><th>PASS/FAIL</th></tr><tr><td><xmp>0001</xmp></td><td><xmp>converts a RFC defined time string into system timestamp</xmp></td><td><xmp>youtube_dl/utils</xmp></td><td><xmp>timeconvert</xmp></td><td><xmp>Fri, 21 Nov 1997 09:55:06 -0600</xmp></td><td><xmp>880127706</xmp></td><td><xmp>880127706</xmp></td><td><xmp>True</xmp></td></tr><tr><td><xmp>0003</xmp></td><td><xmp>Clean an HTML snippet into a readable string</xmp></td><td><xmp>youtube_dl/utils</xmp></td><td><xmp>clean_html</xmp></td><td><xmp><!doctype html> <html lang="en"> <head> <meta charset="utf-8">  </head> <body> <h1>Test Output</h1> <p>$output</p> </body> </html></xmp></td><td><xmp>Test Output $output</xmp></td><td><xmp>Test Output $output</xmp></td><td><xmp>True</xmp></td></tr><tr><td><xmp>0013</xmp></td><td><xmp>Clean an HTML snippet into a readable string</xmp></td><td><xmp>youtube_dl/utils</xmp></td><td><xmp>clean_html</xmp></td><td><xmp><!doctype html> <html lang="en"> <head> <meta charset="utf-8"> <title></title> </head> <body> <h1>hellow world</h1> <p>goobye</p> </body> </html></xmp></td><td><xmp>hellow world goobye</xmp></td><td><xmp>hellow world goobye</xmp></td><td><xmp>True</xmp></td></tr><tr><td><xmp>0004</xmp></td><td><xmp>formats seconds into hours mins and seconds</xmp></td><td><xmp>youtube_dl/utils</xmp></td><td><xmp>formatSeconds</xmp></td><td><xmp>23456</xmp></td><td><xmp>6:30:56</xmp></td><td><xmp>6:30:56</xmp></td><td><xmp>True</xmp></td></tr><tr><td><xmp>0012</xmp></td><td><xmp>sanitizes a string so it could be used as a file name</xmp></td><td><xmp>youtube_dl/utils</xmp></td><td><xmp>sanitize_filename</xmp></td><td><xmp>here is another file \ name to sanitize;True;False</xmp></td><td><xmp>here_is_another_file___name_to_sanitize</xmp></td><td><xmp>here_is_another_file___name_to_sanitize</xmp></td><td><xmp>True</xmp></td></tr><tr><td><xmp>0015</xmp></td><td><xmp>takes an iso8601 and returns UNIX timestamp from the given date</xmp></td><td><xmp>youtube_dl/utils</xmp></td><td><xmp>parse_iso8601</xmp></td><td><xmp>2016-11-15T09:02:43-05:00</xmp></td><td><xmp>1479218563</xmp></td><td><xmp>1479218563</xmp></td><td><xmp>True</xmp></td></tr><tr><td><xmp>0011</xmp></td><td><xmp>converts a RFC defined time string into system timestamp</xmp></td><td><xmp>youtube_dl/utils</xmp></td><td><xmp>timeconvert</xmp></td><td><xmp>Wed, 26 Oct 2016 17:33:10 +0000</xmp></td><td><xmp>1477503190</xmp></td><td><xmp>1477503190</xmp></td><td><xmp>True</xmp></td></tr><tr><td><xmp>0002</xmp></td><td><xmp>sanitizes a string so it could be used as a file name</xmp></td><td><xmp>youtube_dl/utils</xmp></td><td><xmp>sanitize_filename</xmp></td><td><xmp>this is a file name       to sanitize?}{[]\|#'$';True;False</xmp></td><td><xmp>this_is_a_file_name_______to_sanitize__________</xmp></td><td><xmp>this_is_a_file_name_______to_sanitize__________</xmp></td><td><xmp>True</xmp></td></tr><tr><td><xmp>0005</xmp></td><td><xmp>takes an iso8601 and returns UNIX timestamp from the given date</xmp></td><td><xmp>youtube_dl/utils</xmp></td><td><xmp>parse_iso8601</xmp></td><td><xmp>1997-07-16T19:20:30+01:00</xmp></td><td><xmp>869077230</xmp></td><td><xmp>869077230</xmp></td><td><xmp>True</xmp></td></tr>
+      </table>
     </body>
     </html>
