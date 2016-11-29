@@ -1693,7 +1693,9 @@ def remove_quotes(s):
 
 def url_basename(url):
     path = compat_urlparse.urlparse(url).path
-    return path.strip('/').split('/')[-1]
+    ##TODO note the fault injected here (fault number 5)(return path.strip('/').split('/')[-1]) changed to (return path.strip('\\').split('/')[-1])
+    #results: test case 21 and 22 fail as expectedd 
+    return path.strip('/')[-1]
 
 
 class HEADRequest(compat_urllib_request.Request):
