@@ -109,8 +109,13 @@ def executeTestCase(listTests):
                 if ("youtube_dl/utils" == (listTests[i*6+2])):
                     #returnInput = str(getattr(__init__, listTests[index + 2])(*paramaterList)).strip()
                     returnInput = str(getattr(utils, listTests[index + 2])(*paramaterList)).strip()
+                    os.chdir("..")  # gets our of folder
                 else:
+                    os.chdir("..")  # gets our of folder
                     #If the command is to run the main function, you must open a terminal to run.
+                    #os.system("python -m youtube_dl "+listTests[i*6+4])
+                    print("Current dir:", os.getcwd())
+                    #os.chdir("youtube_dl")
                     os.system("python -m youtube_dl "+listTests[i*6+4])
                     returnInput = "Failed"
 
@@ -124,7 +129,9 @@ def executeTestCase(listTests):
                            returnInput = "Success"
 
 
-                os.chdir("..")  # gets our of folder
+                
+                #os.chdir("..")
+                
                 returnList.insert(index + 5 + i * 2, returnInput == listTests[index + 4])
                 returnList.insert(index + 5 + i * 2, returnInput)
             index += 1
