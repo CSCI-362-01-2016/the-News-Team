@@ -1,8 +1,0 @@
-<br><h1>Test4: Verify video is restricted</h1><br>Subject age: 10<br>
-Success! Video downloaded
-<br><h1>Test1 Verify video not restricted:</h1><br>Video: 'Justin Timberlake - Tunnel Vision (Explicit)'<br>Subject age: 10<br>
-Success! Video downloaded
-<br><h1>Test2:  Verify video is not restricted</h1><br>Video: 'Justin Timberlake - Tunnel Vision (Explicit)'<br>Subject age: 28<br>
-Success! Video downloaded
-<br><h1>Test3: Verify video is not restricted</h1><br>Video: Video: '$4 Burger Vs. $777 Burger'<br>Subject age: 10<br>
-Success! Video downloaded
