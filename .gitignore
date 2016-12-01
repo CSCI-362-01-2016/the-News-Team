@@ -22,6 +22,8 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
+*.mp4
+*.mp3
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
