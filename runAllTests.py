@@ -4,8 +4,11 @@ import webbrowser
 from string import Template
 import importlib
 import sys
+import subprocess
 
 from project.youtube_dl import utils
+from project.youtube_dl import __init__
+#from project.youtube_dl import __main__ as main
 
 sys.path.append(os.getcwd())
 from scripts.youtube_dl.utils import formatSeconds
@@ -45,10 +48,12 @@ def parseTextFile():
 
         if file.endswith(".txt"):
             txtFileCount += 1
-
+            #print(file)
             inputFile = open(file, "r")
             for line in inputFile:
+                #print(line)
                 dataList.append(line.strip())
+            #print("-----")
 
             inputFile.close()
     return dataList
@@ -73,14 +78,19 @@ def executeTestCase(listTests):
     numberOfTests = listTests.__len__() // 6
     index = 0
     for i in range(0, numberOfTests):
-        for z in range(1, 7):
-
+        for z in range(1, 7):#This is the range of the parameters.
+            
             if (z == 2):
                 # print(index)
                 temp = listTests[(i * 6) + z]
+                print(i)
+                print(listTests[i*6+1])
+                
+
                 # todo make an if statment making sure that the file is in the base youtube_dl folder
                 os.chdir("youtube_dl")  # get into folder
                 temp = temp.split("/")
+
                 temp[1] = temp[1].strip()  # the name of the method to call
                 paramaterList = listTests[index + 3].split(";")
                 listTests[index + 2] = listTests[index + 2].strip()
@@ -92,8 +102,30 @@ def executeTestCase(listTests):
                 if (paramaterList[0].isdigit()):
                     paramaterList[0] = int(paramaterList[0])
                 # todo dont hardcode default into untils here
-                returnInput = str(getattr(utils, listTests[index + 2])(*paramaterList)).strip()
-                os.chdir("..")  # gets our of folder
+
+                print(listTests[index + 2])
+                
+                if ("youtube_dl/utils" == (listTests[i*6+2])):
+                    #returnInput = str(getattr(__init__, listTests[index + 2])(*paramaterList)).strip()
+                    returnInput = str(getattr(utils, listTests[index + 2])(*paramaterList)).strip()
+                    os.chdir("..")  # gets our of folder
+                else:
+                    os.chdir("..")  # gets our of folder
+                    #If the command is to run the main function, you must open a terminal to run.
+                    os.system("python -m youtube_dl "+listTests[i*6+4])
+                    returnInput = "Failed"
+
+                    dirs = os.listdir(".")
+                    #Return Success if the video was properly downloaded.
+                    videoID = (listTests[i*6+4]).split("/")
+                    videoID = videoID[-1]
+                    for file in dirs:
+                       print (file)
+                       if file.find(videoID) != -1:
+                           returnInput = "Success"
+
+
+                                
                 returnList.insert(index + 5 + i * 2, returnInput == listTests[index + 4])
                 returnList.insert(index + 5 + i * 2, returnInput)
             index += 1
