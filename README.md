@@ -1,4 +1,5 @@
 # the-News-Team
 
 ##Running The test case framework:
-Navigate to scripts and run the "runAllTests.sh"
+using terminal navigate to the TestAutomation directory
+run the following command: sh scripts/runAllTests.sh
