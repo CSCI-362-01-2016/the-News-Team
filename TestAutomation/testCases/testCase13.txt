@@ -1,0 +1,6 @@
+0013
+Clean an HTML snippet into a readable string
+youtube_dl/utils
+clean_html
+<!doctype html> <html lang="en"> <head> <meta charset="utf-8"> <title></title> </head> <body> <h1>hellow world</h1> <p>goobye</p> </body> </html>
+hellow world goobye

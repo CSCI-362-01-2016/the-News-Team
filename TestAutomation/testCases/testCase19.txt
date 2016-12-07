@@ -1,0 +1,6 @@
+0019
+returns number of seconds for a variety of string representations of durations
+youtube_dl/utils
+parse_duration
+12:30
+750.0

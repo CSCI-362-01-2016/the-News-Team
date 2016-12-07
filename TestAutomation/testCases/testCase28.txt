@@ -1,0 +1,6 @@
+0028
+Downloads a video from Clip Syndicate
+youtube_dl/__init__
+main
+http://www.clipsyndicate.com/video/play/6657097
+Success
