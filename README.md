@@ -1,4 +1,6 @@
-# the-News-Team
+# Youtube-dl Testing Framework.
+
+Youtube-dl is an open source software that allows users to download online videos via a Linux terminal command.
 
 ##Running The test case framework:
 In the main directory, look for the file "topLevelScript.py"
