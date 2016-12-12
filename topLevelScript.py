@@ -1,4 +1,10 @@
 #!/usr/bin/env python
+
+
+#This python file reads in a series of predefined test cases (../testCases), verifies that each test case produces
+#the expected outcome, and then creates an HTML table of each case an its results.
+
+
 import os
 import webbrowser
 from string import Template
@@ -21,13 +27,14 @@ def main():
                   "example expected outcome(s)", "example actual outcome", "example PASS/FAIL", " example Test case",
                   "requirement", "example component", "example method", "example inputs", "example expected outcome(s)",
                   "example actual outcome", " example PASS/FAIL"]
-    # formatSeconds(4543)
+
     outstr = executeTestCase(parseTextFile())
     textToHtml(outstr)
     # executeTestCase(parseTextFile())
     loadOutputInBrowser()
 
-
+#This method changes the directory to the testCases folder, which contains all of the methods to be tested.
+#Next, the method parses each line to extract the test method, inputs, and expected outputs.
 def parseTextFile():
     # number of text files to parse
     txtFileCount = 0
@@ -44,20 +51,17 @@ def parseTextFile():
         # [4] Test input
         # [5] Expected Outcomes
 
-
+        #find all of the files that are test cases...
         if file.endswith(".txt"):
             txtFileCount += 1
-            #print(file)
             inputFile = open(file, "r")
             for line in inputFile:
-                #print(line)
                 dataList.append(line.strip())
-            #print("-----")
 
             inputFile.close()
     return dataList
 
-
+#A temporary in-dev method, not used in final framework
 def fakeexecuteTestCases():
     tempList = parseTextFile()
     returnList = tempList.copy()
@@ -69,7 +73,7 @@ def fakeexecuteTestCases():
     print(returnList)
     return returnList
 
-
+#This method reads through each test case, and executes that method.
 def executeTestCase(listTests):
     returnList = listTests.copy()
     os.chdir("..")
@@ -104,11 +108,15 @@ def executeTestCase(listTests):
 
                 print(listTests[index + 2])
                 
+                #If the method to be tested is in the utils folder, execute it from utils.py.
                 if ("youtube_dl/utils" == (listTests[i*6+2])):
                     #returnInput = str(getattr(__init__, listTests[index + 2])(*paramaterList)).strip()
                     returnInput = str(getattr(utils, listTests[index + 2])(*paramaterList)).strip()
                     os.chdir("..")  # gets our of folder
                 else:
+                    #Otherwise, execute the terminal command of that method.  Some test cases cannot be run
+                    #Using the getattribute method of python.
+                    
                     os.chdir("..")  # gets our of folder
                     #If the command is to run the main function, you must open a terminal to run.
                     os.system("python -m youtube_dl "+listTests[i*6+4])
@@ -136,7 +144,7 @@ def executeTestCase(listTests):
 def writeOutputToHtml():
     return
 
-
+#Generate an HTML table of all the test cases.
 def textToHtml(listOutput):
     os.chdir("scripts")
     outf = open("TestReport.html", "w")
@@ -200,7 +208,7 @@ def textToHtml(listOutput):
     outf.write(template.substitute(output=out))
     outf.close()
 
-
+#Load the saved html file into the user's browser.
 def loadOutputInBrowser():
     new = 2  # Code used to open html link in a new tab
     webbrowser.open(pathName + "/scripts/TestReport.html", new=new)
